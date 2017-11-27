@@ -13,7 +13,7 @@
 void generation_aleatoire(Terrain* T, int l, int h, float dObst){
    srand((unsigned)time(NULL));
    int i,j,tmp;
-   int chemin_trouver=0;
+
    if(T == NULL){
 	printf("Terrain n'existe pas\n");
 	exit(1);	   
@@ -37,7 +37,7 @@ void generation_aleatoire(Terrain* T, int l, int h, float dObst){
 	  }
 	}
   }
-  T.tab[(1+l)/2][(1+h)/2] = LIBRE;  //Assurer la case centrale soit LIBRE;
+  T.tab[(l-1)/2][(h-1)/2] = LIBRE;  //Assurer la case centrale soit LIBRE;
 
 }
 

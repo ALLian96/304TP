@@ -138,6 +138,6 @@ void ecrire_terrain(FILE *f, Terrain T, int x, int y){
 		 	fputfc("\n",f);
 		}
 		dObst_obtenu = (l*h-compteur_libre)/l*h;
-		fprintf(resFile,"%.2f\n",dObst_obtenu);
+		fprintf(f,"%.2f\n",dObst_obtenu);
 	}
 }
