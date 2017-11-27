@@ -1,3 +1,26 @@
+
+CC=gcc -Wall
+
+terrains:generation_terrains.o test_generation_terrains.o terrains.o robot.o
+	$(CC) terrains -o generation_terrains.o test_generation_terrains.o robot.o
+terrains.o:terrains.c terrains.h robot.c robot.h
+	$(CC) -c terrains.c robot.c
+generation_terrains.o:generation_terrains.c generation_terrains.h
+	$(CC) -c generation_terrains.c
+test_generation_terrains.o: generation_terrains.h generation_terrains.c test_generation_terrains.c
+	$(CC) -c test_generation_terrains.c generation_terrains.c
+clean:
+	rm -f $(terrains) *.o
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 CC=gcc -Wall
 
 PROGRAMMES=test_terrain test_robot robot_terrain curiosity curiosity-test
