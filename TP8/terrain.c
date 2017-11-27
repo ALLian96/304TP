@@ -7,10 +7,10 @@
 erreur_terrain lire_terrain(char * nom_fichier, Terrain * t, int * x, int * y) {
   FILE * f;
   int l, h; // Dimensions du terrain
-  int rx, ry; // CoordonnÃ©es initiales du robot
-  int pos_robot = 0; // BoolÃ©en : vrai si la position du robot a Ã©tÃ© lue
+  int rx, ry; // Coordonnées initiales du robot
+  int pos_robot = 0; // Booléen : vrai si la position du robot a été lue
   int n; // Nombre de valeurs lues
-  char * res; // RÃ©sultat de la lecture d'une ligne
+  char * res; // Résultat de la lecture d'une ligne
   int lgligne; // Longueur de la ligne lue
   int i, j;
   char ligne[DIM_MAX];
@@ -40,7 +40,7 @@ erreur_terrain lire_terrain(char * nom_fichier, Terrain * t, int * x, int * y) {
   }
   t->hauteur = h;
   // Lecture du terrain
-  // Lecture du caractÃ¨re de retour Ã  la ligne prÃ©cÃ©dant la premiÃ¨re ligne
+  // Lecture du caractère de retour à la ligne précédant la première ligne
   fscanf(f,"\n");
   for(j = 0; j < h; j++) {
     // Lecture d'une ligne dans le fichier
@@ -48,7 +48,7 @@ erreur_terrain lire_terrain(char * nom_fichier, Terrain * t, int * x, int * y) {
     if (res == NULL) {
       return ERREUR_LIGNES_MANQUANTES;
     }
-    lgligne = strlen(ligne) - 1; // Tenir compte du caractÃ¨re de retour Ã  la ligne
+    lgligne = strlen(ligne) - 1; // Tenir compte du caractère de retour à la ligne
     if(lgligne < l) {
       return ERREUR_LIGNE_TROP_COURTE;
     } else if (lgligne > l) {
@@ -122,8 +122,7 @@ void ecrire_terrain(FILE *f, Terrain T, int x, int y){
 	char c;
 	float dObst_obtenu;
 	int compteur_libre;
- 	f = fopen("terrain_test.txt","w");
-	if(f ! = NULL){
+	if(f != NULL){
 		fprintf(f,"%d\n",x);
 		fprintf(f,"%d\n",y);
 		for(j=0;j < hauteur(T); j++){
@@ -133,11 +132,14 @@ void ecrire_terrain(FILE *f, Terrain T, int x, int y){
                                    case ROCHER: c = '#'; 		   break;
       				   case EAU   : c = '~'; 		   break;
 				}
+				if(i==(x-1)/2 && j == (y-1)/2){
+				   c = 'C';				
+				}
 				fprintf(f,"%c",c);
 			}
-		 	fputfc("\n",f);
+		 	fprintf(f,"\n");
 		}
-		dObst_obtenu = (l*h-compteur_libre)/l*h;
-		fprintf(f,"%.2f\n",dObst_obtenu);
+		dObst_obtenu = (float)(x*y-compteur_libre)/(x*y);	
+		fprintf(f,"%.3f\n",dObst_obtenu);
 	}
 }

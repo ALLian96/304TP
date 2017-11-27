@@ -11,7 +11,6 @@
               La case centrale de T ne contient pas d'obstacle.
  */
 void generation_aleatoire(Terrain* T, int l, int h, float dObst){
-   srand((unsigned)time(NULL));
    int i,j,tmp;
 
    if(T == NULL){
@@ -21,23 +20,23 @@ void generation_aleatoire(Terrain* T, int l, int h, float dObst){
    T->largeur = l;
    T->hauteur = h;
   
-  for(j=0;j < hauteur(T); j++){
-	for(i = 0; i< largeur(T); i++){
+  for(j=0;j < hauteur(*T); j++){
+	for(i = 0; i< largeur(*T); i++){
 	 /*générer un chiffre entre 0-2 qui correspond 0:LIBRE,1: EAU,2: ROCHER*/
 	   	  
-	  tmp=rand()/(RAND_MAX+1.0)<dObst?2:0;  //générer des chiffres aléatoires entre 0-1; si ce chiffre aléa < la densité d'obstacle, cette case = 2 soit ROCHER, sinon case 			 								= 0 soit LIBRE
+	 tmp=rand()/(RAND_MAX+1.0)<dObst?2:0;  //générer des chiffres aléatoires entre 0-1; si ce chiffre aléa < la densité d'obstacle, cette case = 2 soit ROCHER, sinon case 			 								= 0 soit LIBRE
 		 
 	  if(tmp==2){
 		tmp=rand()%10>5?2:1;	       //si case = 2 alors on précise le type de case, générer encore une fois des chiffres aléatoires entre 0-9, et générer EAU et ROCHER avec une 								proportion 1:1 cad. si ce chiffre >5 alors, case = 2, sinon case = 1;
 	  }
 	  switch(tmp){
-	    case 0:T.tab[i][j] == LIBRE; break;
-	    case 1:T.tab[i][j] == EAU;   break;
-	    case 2:T.tab[i][j] == ROCHER;break;
+	    case 0:T->tab[i][j] = LIBRE; break;
+	    case 1:T->tab[i][j] = EAU;   break;
+	    case 2:T->tab[i][j] = ROCHER;break;
 	  }
 	}
   }
-  T.tab[(l-1)/2][(h-1)/2] = LIBRE;  //Assurer la case centrale soit LIBRE;
+  T->tab[(l-1)/2][(h-1)/2] = LIBRE;  //Assurer la case centrale soit LIBRE;
 
 }
 

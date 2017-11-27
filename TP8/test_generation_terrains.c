@@ -72,14 +72,14 @@ int main(int argc, char ** argv){
 	if(existe_chemin_vers_sortie(T)){
 	compt_terrain_v++;	
 	}
-	nbtotal_case_occup=nbtotal_case_occup + nb_cases_occupees(Terrain T);
-  }+
+	nbtotal_case_occup=nbtotal_case_occup + nb_cases_occupees(T);
+  }
   // Écriture/Affichage des statistiques
-  dmoyen = nbtotal_case_occup/N*l*h;
-  fprintf(f,"la densité d'obstacle moyenne : %.2f\n",dmoyen);
-
+  dmoyen = (float)nbtotal_case_occup/(N*l*h);
+  fprintf(resFile,"la densité d'obstacle moyenne : %.3f\n",dmoyen);
+  
   perc_valide = (float)compt_terrain_v/N*100;
-  fprintf(f,"le pourcentage de terrain valides : %.2f%%\n",perc_valide);
+  fprintf(resFile,"le pourcentage de terrain valides : %.2f%%\n",perc_valide);
   // fermeture des fichiers	
   fclose(resFile);
   return 0;
